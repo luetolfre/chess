@@ -70,8 +70,8 @@ public class Chess {
         pieces.add(new Queen(0,3, Color.BLACK));
         pieces.add(new Queen(7,3, Color.WHITE));
 
-        pieces.add(new Queen(0,4, Color.BLACK));
-        pieces.add(new Queen(7,4, Color.WHITE));
+        pieces.add(new King(0,4, Color.BLACK));
+        pieces.add(new King(7,4, Color.WHITE));
 
         return pieces;
     }
@@ -82,5 +82,7 @@ public class Chess {
     }
 
 
-
+    public List<Piece> getPieces() {
+        return pieces;
+    }
 }

@@ -6,10 +6,11 @@ public abstract class Piece {
     private int row;
     private int col;
     private Color color;
+    private String imagePath;
     private List<Position> possibleMoves;
     private boolean alive;
 
-    public Piece(int row, int col, Color color) {
+    public Piece(int col, int row, Color color) {
         this.row = row;
         this.col = col;
         this.color = color;
@@ -21,5 +22,17 @@ public abstract class Piece {
 
     public Color getColor() {
         return color;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
     }
 }

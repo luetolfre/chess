@@ -12,11 +12,13 @@ import java.io.FileNotFoundException;
 
 public class StartPane extends BorderPane {
 
+    private final Controller CONTROLLER;
     private final Stage STAGE;
     private final Text TITLE;
     private final Button BUTTON;
 
-    public StartPane(Stage stage, String title) {
+    public StartPane(Controller controller, Stage stage, String title) {
+        this.CONTROLLER = controller;
         this.STAGE = stage;
         this.TITLE = new Text(title);
         this.BUTTON = new Button("play");
@@ -33,7 +35,7 @@ public class StartPane extends BorderPane {
     private void setup(){
         this.BUTTON.setOnAction(event -> {
             try {
-                Controller.showGamePane(STAGE);
+                this.CONTROLLER.showGamePane(STAGE);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

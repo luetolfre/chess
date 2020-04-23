@@ -2,8 +2,11 @@ package net.ictcampus.chess.model;
 
 public class Queen extends Piece {
 
+    private String imagePath;
     public Queen(int row, int col, Color color) {
         super(row, col, color);
+        this.imagePath = (color == Color.BLACK) ? "res/img/queen_b.png" : "res/img/queen_w.png";
+
     }
 
     @Override
@@ -14,5 +17,10 @@ public class Queen extends Piece {
     @Override
     public void updatePossibleMoves() {
         //TODO
+    }
+
+    @Override
+    public String getImagePath() {
+        return imagePath;
     }
 }

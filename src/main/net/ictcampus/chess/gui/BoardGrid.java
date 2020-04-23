@@ -2,9 +2,9 @@ package net.ictcampus.chess.gui;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
-import javafx.beans.property.ListProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
-import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.Control;
 import javafx.scene.image.Image;
@@ -14,6 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.shape.Rectangle;
+import net.ictcampus.chess.Controller;
 import net.ictcampus.chess.model.Piece;
 
 import java.io.FileInputStream;
@@ -22,12 +23,15 @@ import java.util.List;
 
 public class BoardGrid extends GridPane {
 
+    private final Controller CONTROLLER;
     final static int SIZE = 8;
     private List<Rectangle> tiles;
-    private ListProperty<Piece> whitePieces;
+    private List<Piece> pieces;
 
 
-    public BoardGrid() throws FileNotFoundException {
+    public BoardGrid(Controller controller) throws FileNotFoundException {
+        this.CONTROLLER = controller;
+        this.pieces = this.CONTROLLER.createObservablePieces();
         this.createBoard();
         this.setupPieces();
         this.style();
@@ -53,6 +57,11 @@ public class BoardGrid extends GridPane {
     }
 
     private void setupPieces() throws FileNotFoundException {
+
+        for (Piece p : pieces){
+            this.add(getImage(p.getImagePath()), p.getRow(), p.getCol());
+        }
+        /*
         for (int i = 0; i<SIZE; i++){
             this.add(getImage("res/img/pawn_w.png"), i,6);
             this.add(getImage("res/img/pawn_b.png"), i,1);
@@ -77,6 +86,8 @@ public class BoardGrid extends GridPane {
 
         this.add(getImage("res/img/king_w.png"), 4,7);
         this.add(getImage("res/img/king_b.png"), 4,0);
+
+         */
 
     }
 
