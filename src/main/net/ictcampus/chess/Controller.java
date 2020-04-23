@@ -12,14 +12,14 @@ import net.ictcampus.chess.gui.EndPane;
 import net.ictcampus.chess.gui.StartPane;
 import net.ictcampus.chess.gui.Style;
 
-public class Controller {
+import java.io.FileNotFoundException;
 
-    // --------EVENTS----------------
+public class Controller {
     public static void play(){
 
     }
 
-    public static void showGamePane(Stage stage){
+    public static void showGamePane(Stage stage) throws FileNotFoundException {
         showPane(stage, new ChessPane(stage, "CHESS"));
     }
 

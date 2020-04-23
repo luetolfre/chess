@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 import net.ictcampus.chess.App;
 import net.ictcampus.chess.Controller;
 
+import java.io.FileNotFoundException;
+
 public class StartPane extends BorderPane {
 
     private final Stage STAGE;
@@ -29,7 +31,13 @@ public class StartPane extends BorderPane {
     }
 
     private void setup(){
-        this.BUTTON.setOnAction(event -> {Controller.showGamePane(STAGE);});
+        this.BUTTON.setOnAction(event -> {
+            try {
+                Controller.showGamePane(STAGE);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        });
         VBox main = Style.addToVBox(Style.addToHBox(this.TITLE), Style.addToHBox(this.BUTTON));
         this.setCenter(main);
     }

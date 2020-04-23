@@ -6,6 +6,15 @@
     -fx-max-height: 750px;
 }
 
+.tile{
+}
+
+.piece{
+}
+
+.piece-img{
+}
+
 .light-tile{
     -fx-fill: lightgray;
     -fx-background-color: lightgray;
