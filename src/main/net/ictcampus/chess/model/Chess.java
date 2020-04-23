@@ -6,14 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Chess {
+    private final int SIZE = 8;
     private List<Position> board;
     private List<Player> players;
+    private List<Piece> pieces;
     private List<Pair<Position, Position>> history;
     private boolean turnOfP1;
 
-    public Chess(String Player1, String Player2) {
-        createBoard();
-        createPlayerList(Player1, Player2);
+    public Chess(String player1, String player2) {
+        this.board = createBoard();
+        this.pieces = createPieces();
+        this.players = createPlayerList(player1, player2, this.pieces);
         this.history = new ArrayList<>();
         this.turnOfP1 = true;
     }
@@ -26,20 +29,51 @@ public class Chess {
         //TODO
     }
 
-    private void createPlayerList(String player1, String player2) {
-        //TODO
+    private List<Player> createPlayerList(String player1, String player2, List<Piece> pieceList) {
+        List<Player> players = new ArrayList<>();
+        players.add(new Player(player1, Color.WHITE, pieceList));
+        players.add(new Player(player2, Color.BLACK, pieceList));
+        return players;
     }
 
-    private void createBoard() {
-        char letter = 'A';
-        int size = 8;
-        for (int y=0; y<size; y++){
-            for (int x=0; x<size; x++){
-                int number = (size-x);
-                board.add(new Position(x,y, String.valueOf(letter)+Integer.toString(number)));
+    private List<Position> createBoard() {
+        List<Position> board = new ArrayList<>();
+        for (int y=0; y<SIZE; y++){
+            for (int x=0; x<SIZE; x++){
+                board.add(new Position(x,y));
             }
-            letter++;
         }
+        return board;
+    }
+
+    private List<Piece> createPieces(){
+        List<Piece> pieces = new ArrayList<>();
+        for (int i = 0; i<SIZE; i++){
+            pieces.add(new Pawn(1,i, Color.BLACK));
+            pieces.add(new Pawn(6,i, Color.WHITE));
+        }
+        pieces.add(new Rook(0,0, Color.BLACK));
+        pieces.add(new Rook(0,7, Color.BLACK));
+        pieces.add(new Rook(7,0, Color.WHITE));
+        pieces.add(new Rook(7,7, Color.WHITE));
+
+        pieces.add(new Knight(0,1, Color.BLACK));
+        pieces.add(new Knight(0,6, Color.BLACK));
+        pieces.add(new Knight(7,1, Color.WHITE));
+        pieces.add(new Knight(7,6, Color.WHITE));
+
+        pieces.add(new Bishop(0,2, Color.BLACK));
+        pieces.add(new Bishop(0,5, Color.BLACK));
+        pieces.add(new Bishop(7,2, Color.WHITE));
+        pieces.add(new Bishop(7,5, Color.WHITE));
+
+        pieces.add(new Queen(0,3, Color.BLACK));
+        pieces.add(new Queen(7,3, Color.WHITE));
+
+        pieces.add(new Queen(0,4, Color.BLACK));
+        pieces.add(new Queen(7,4, Color.WHITE));
+
+        return pieces;
     }
 
     public boolean isEmpty(Position pos){
