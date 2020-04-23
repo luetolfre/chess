@@ -1,0 +1,28 @@
+.chess-pane{
+    -fx-alignment: center;
+}
+.board{
+    -fx-max-width: 750px;
+    -fx-max-height: 750px;
+}
+
+.light-tile{
+    -fx-fill: lightgray;
+    -fx-background-color: lightgray;
+
+}
+
+.dark-tile{
+    -fx-fill: darkslategray;
+    -fx-background-color: lightgray;
+}
+
+.player-name{
+    -fx-fill: white;
+}
+
+.play-button{
+    /*-fx-font-size: 20px;
+    -fx-background-color: white;
+*/
+}
