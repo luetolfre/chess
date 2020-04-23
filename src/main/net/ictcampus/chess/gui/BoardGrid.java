@@ -33,7 +33,7 @@ public class BoardGrid extends GridPane {
         this.CONTROLLER = controller;
         this.pieces = this.CONTROLLER.createObservablePieces();
         this.createBoard();
-        this.setupPieces();
+        this.updatePieces();
         this.style();
     }
 
@@ -56,39 +56,10 @@ public class BoardGrid extends GridPane {
         //setConstraints(board);
     }
 
-    private void setupPieces() throws FileNotFoundException {
-
+    private void updatePieces() throws FileNotFoundException {
         for (Piece p : pieces){
             this.add(getImage(p.getImagePath()), p.getRow(), p.getCol());
         }
-        /*
-        for (int i = 0; i<SIZE; i++){
-            this.add(getImage("res/img/pawn_w.png"), i,6);
-            this.add(getImage("res/img/pawn_b.png"), i,1);
-        }
-        this.add(getImage("res/img/rook_w.png"), 0,7);
-        this.add(getImage("res/img/rook_w.png"), 7,7);
-        this.add(getImage("res/img/rook_b.png"), 0,0);
-        this.add(getImage("res/img/rook_b.png"), 7,0);
-
-        this.add(getImage("res/img/knight_w.png"), 1,7);
-        this.add(getImage("res/img/knight_w.png"), 6,7);
-        this.add(getImage("res/img/knight_b.png"), 1,0);
-        this.add(getImage("res/img/knight_b.png"), 6,0);
-
-        this.add(getImage("res/img/bishop_w.png"), 2,7);
-        this.add(getImage("res/img/bishop_w.png"), 5,7);
-        this.add(getImage("res/img/bishop_b.png"), 2,0);
-        this.add(getImage("res/img/bishop_b.png"), 5,0);
-
-        this.add(getImage("res/img/queen_w.png"), 3,7);
-        this.add(getImage("res/img/queen_b.png"), 3,0);
-
-        this.add(getImage("res/img/king_w.png"), 4,7);
-        this.add(getImage("res/img/king_b.png"), 4,0);
-
-         */
-
     }
 
     private ImageView getImage(String path) throws FileNotFoundException {
