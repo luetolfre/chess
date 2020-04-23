@@ -1,0 +1,20 @@
+.scene-title {
+    -fx-font-size: 100px;
+    -fx-fill: white;
+}
+
+.play-button{
+    -fx-font-size: 120px;
+    -fx-background-color: white;
+
+}
+
+.label{
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+}
+
+.h-box{
+
+}
+

@@ -1,4 +1,6 @@
 package net.ictcampus.chess.gui;
 
-public class ChessPane {
+import javafx.scene.layout.Pane;
+
+public class ChessPane extends Pane {
 }

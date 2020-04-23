@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import net.ictcampus.chess.gui.StartPane;
+import net.ictcampus.chess.gui.Style;
 
 public class App extends Application {
 
@@ -12,13 +14,14 @@ public class App extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
-        primaryStage.setTitle("CHESS");
-        Scene scene = new Scene(new Pane(), 700, 700);
-        scene.getStylesheets().add(App.class.getResource("/css/main.css").toExternalForm());
-        primaryStage.setScene(scene);
+    public void start(Stage stage) {
+        stage.setTitle("CHESS");
+        Pane start = new StartPane(stage, "chess");
+        Scene scene = new Scene(start, 900, 900);
+        Style.setStyleSheet(scene, "/css/main.css");
+        stage.setScene(scene);
         // primaryStage.setFullScreen(true);
-        primaryStage.show();
-        // test
+        stage.show();
     }
+
 }

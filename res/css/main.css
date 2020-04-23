@@ -2,3 +2,17 @@
     -fx-background-color: black;
     -fx-text-fill: white;
 }
+.h-box{
+    -fx-alignment: center;
+    -fx-font-weight: bold;
+    -fx-font-family: "Arial Black";
+    -fx-text-fill: white;
+}
+
+.v-box{
+    -fx-alignment: center;
+    -fx-font-weight: bold;
+    -fx-font-family: "Arial Black";
+    -fx-text-fill: white;
+    -fx-spacing: 10px;
+}
