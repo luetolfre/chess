@@ -1,5 +1,7 @@
 package net.ictcampus.chess.model;
 
+import net.ictcampus.chess.constant.Color;
+
 import java.util.List;
 
 public abstract class Piece {

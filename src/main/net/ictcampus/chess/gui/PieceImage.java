@@ -1,6 +1,7 @@
 package net.ictcampus.chess.gui;
 
-import net.ictcampus.chess.model.Color;
+import net.ictcampus.chess.constant.Color;
+import net.ictcampus.chess.constant.PieceType;
 
 public class PieceImage {
 

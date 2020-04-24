@@ -1,5 +1,7 @@
 package net.ictcampus.chess.model;
 
+import net.ictcampus.chess.constant.Color;
+
 public class Knight extends Piece {
 
     private String imagePath;

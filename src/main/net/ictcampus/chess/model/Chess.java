@@ -1,6 +1,8 @@
 package net.ictcampus.chess.model;
 
 import javafx.util.Pair;
+import net.ictcampus.chess.constant.Color;
+import net.ictcampus.chess.constant.GameStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,7 @@ public class Chess {
     private List<Player> players;
     private List<Piece> pieces;
     private List<Pair<Position, Position>> history;
+    private GameStatus status;
     private boolean turnOfP1;
 
     public Chess(String player1, String player2) {
@@ -19,6 +22,7 @@ public class Chess {
         this.players = createPlayerList(player1, player2, this.pieces);
         this.history = new ArrayList<>();
         this.turnOfP1 = true;
+        this.status = GameStatus.RUNNING;
     }
 
     public void update(){
