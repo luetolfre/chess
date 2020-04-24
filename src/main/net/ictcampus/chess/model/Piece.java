@@ -18,8 +18,16 @@ public abstract class Piece {
         this.color = color;
     }
 
+    /**
+     * moves the piece to a new position and updates the Gamestatus
+     */
     public abstract void move();
-    public abstract void updatePossibleMoves();
+
+    /**
+     * Calculates the possible Moves from this Piece.
+     * @return List of possible Moves
+     */
+    public abstract List<Position> updatePossibleMoves();
 
 
     public Color getColor() {

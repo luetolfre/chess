@@ -7,6 +7,14 @@ import net.ictcampus.chess.constant.GameStatus;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <h3> Chess Class </h3>
+ * represents a chess game
+ *
+ * @author luetolfre
+ * @version 1.0
+ * @since 2020-04-24
+ */
 public class Chess {
     private final int SIZE = 8;
     private List<Position> board;
@@ -16,6 +24,11 @@ public class Chess {
     private GameStatus status;
     private boolean turnOfP1;
 
+    /**
+     * Initializes a new Chess object
+     * @param player1 name of player 1
+     * @param player2 name of player 2
+     */
     public Chess(String player1, String player2) {
         this.board = createBoard();
         this.pieces = createPieces();
@@ -25,20 +38,34 @@ public class Chess {
         this.status = GameStatus.RUNNING;
     }
 
+    /**
+     * updates the whole Chess object
+     */
     public void update(){
         //TODO
     }
 
+    /**
+     * Starts the Game
+     */
     public void play(){
         //TODO
     }
 
+    /**
+     * Adds player to the list of players in the game
+     * @param player1 name of player 1
+     * @param player2 name of player 2
+     * @param pieceList list of all pieces of the game
+     * @return list of players
+     */
     private List<Player> createPlayerList(String player1, String player2, List<Piece> pieceList) {
         List<Player> players = new ArrayList<>();
         players.add(new Player(player1, Color.WHITE, pieceList));
         players.add(new Player(player2, Color.BLACK, pieceList));
         return players;
     }
+
 
     private List<Position> createBoard() {
         List<Position> board = new ArrayList<>();
