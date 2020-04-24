@@ -15,6 +15,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.shape.Rectangle;
 import net.ictcampus.chess.Controller;
+import net.ictcampus.chess.model.Chess;
 import net.ictcampus.chess.model.Piece;
 
 import java.io.FileInputStream;
@@ -23,17 +24,17 @@ import java.util.List;
 
 public class BoardGrid extends GridPane {
 
-    private final Controller CONTROLLER;
+    private Chess game;
     final static int SIZE = 8;
     private List<Rectangle> tiles;
     private List<Piece> pieces;
 
 
-    public BoardGrid(Controller controller) throws FileNotFoundException {
-        this.CONTROLLER = controller;
-        this.pieces = this.CONTROLLER.createObservablePieces();
+    public BoardGrid(Chess game) throws FileNotFoundException {
+        this.game = game;
+        this.pieces = Controller.createObservablePieces(game.getPieces());
         this.createBoard();
-        this.setupPieces();
+        this.updatePieces();
         this.style();
     }
 
@@ -56,39 +57,10 @@ public class BoardGrid extends GridPane {
         //setConstraints(board);
     }
 
-    private void setupPieces() throws FileNotFoundException {
-
+    private void updatePieces() throws FileNotFoundException {
         for (Piece p : pieces){
             this.add(getImage(p.getImagePath()), p.getRow(), p.getCol());
         }
-        /*
-        for (int i = 0; i<SIZE; i++){
-            this.add(getImage("res/img/pawn_w.png"), i,6);
-            this.add(getImage("res/img/pawn_b.png"), i,1);
-        }
-        this.add(getImage("res/img/rook_w.png"), 0,7);
-        this.add(getImage("res/img/rook_w.png"), 7,7);
-        this.add(getImage("res/img/rook_b.png"), 0,0);
-        this.add(getImage("res/img/rook_b.png"), 7,0);
-
-        this.add(getImage("res/img/knight_w.png"), 1,7);
-        this.add(getImage("res/img/knight_w.png"), 6,7);
-        this.add(getImage("res/img/knight_b.png"), 1,0);
-        this.add(getImage("res/img/knight_b.png"), 6,0);
-
-        this.add(getImage("res/img/bishop_w.png"), 2,7);
-        this.add(getImage("res/img/bishop_w.png"), 5,7);
-        this.add(getImage("res/img/bishop_b.png"), 2,0);
-        this.add(getImage("res/img/bishop_b.png"), 5,0);
-
-        this.add(getImage("res/img/queen_w.png"), 3,7);
-        this.add(getImage("res/img/queen_b.png"), 3,0);
-
-        this.add(getImage("res/img/king_w.png"), 4,7);
-        this.add(getImage("res/img/king_b.png"), 4,0);
-
-         */
-
     }
 
     private ImageView getImage(String path) throws FileNotFoundException {

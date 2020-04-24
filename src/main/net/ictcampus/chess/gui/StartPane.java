@@ -7,18 +7,19 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import net.ictcampus.chess.App;
 import net.ictcampus.chess.Controller;
+import net.ictcampus.chess.model.Chess;
 
 import java.io.FileNotFoundException;
 
 public class StartPane extends BorderPane {
 
-    private final Controller CONTROLLER;
+    private final Chess GAME;
     private final Stage STAGE;
     private final Text TITLE;
     private final Button BUTTON;
 
-    public StartPane(Controller controller, Stage stage, String title) {
-        this.CONTROLLER = controller;
+    public StartPane(Chess game, Stage stage, String title) {
+        this.GAME = game;
         this.STAGE = stage;
         this.TITLE = new Text(title);
         this.BUTTON = new Button("play");
@@ -35,7 +36,7 @@ public class StartPane extends BorderPane {
     private void setup(){
         this.BUTTON.setOnAction(event -> {
             try {
-                this.CONTROLLER.showGamePane(STAGE);
+                Controller.showGamePane(this.GAME, STAGE);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

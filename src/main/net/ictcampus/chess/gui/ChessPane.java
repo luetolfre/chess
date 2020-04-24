@@ -5,30 +5,32 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import net.ictcampus.chess.Controller;
+import net.ictcampus.chess.model.Chess;
+
 import java.io.FileNotFoundException;
 
 
 public class ChessPane extends BorderPane {
 
-    private final Controller CONTROLLER;
+    private final Chess GAME;
     private final Stage STAGE;
     private final Text TITLE;
     private final GridPane BOARD;
     private final Button BUTTON;
 
 
-    public ChessPane(Controller CONTROLLER,Stage STAGE, String TITLE) throws FileNotFoundException {
-        this.CONTROLLER = CONTROLLER;
+    public ChessPane(Chess game, Stage STAGE, String TITLE) throws FileNotFoundException {
+        this.GAME = game;
         this.STAGE = STAGE;
         this.TITLE = new Text(TITLE);
-        this.BOARD = new BoardGrid(CONTROLLER);
+        this.BOARD = new BoardGrid(game);
         this.BUTTON = new Button("end game");
         this.style();
         this.setup();
     }
 
     private void setup() {
-        this.BUTTON.setOnAction(event -> {this.CONTROLLER.showEndPane(STAGE);});
+        this.BUTTON.setOnAction(event -> {Controller.showEndPane(this.GAME, STAGE);});
         this.setCenter(this.BOARD);
         //this.setLeft(createVBoxText("player1"));
         //this.setRight(createVBoxText("player2"));

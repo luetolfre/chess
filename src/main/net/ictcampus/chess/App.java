@@ -6,6 +6,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import net.ictcampus.chess.gui.StartPane;
 import net.ictcampus.chess.gui.Style;
+import net.ictcampus.chess.model.Chess;
 
 public class App extends Application {
 
@@ -15,9 +16,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
-        Controller controller = new Controller();
+        Chess game = new Chess("p1", "p2");
         stage.setTitle("CHESS");
-        Pane start = new StartPane(controller, stage, "chess");
+        Pane start = new StartPane(game, stage, "chess");
         Scene scene = new Scene(start, 900, 900);
         Style.setStyleSheet(scene, "/css/main.css");
         stage.setScene(scene);
