@@ -2,6 +2,7 @@ package net.ictcampus.chess;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import net.ictcampus.chess.gui.StartPane;
@@ -33,6 +34,7 @@ public class ChessApp extends Application {
     @Override
     public void start(Stage stage) {
         Chess game = new Chess("p1", "p2");
+        stage.getIcons().add(new Image("/img/b/knight.png"));
         stage.setTitle("CHESS");
         Pane start = new StartPane(game, stage, "chess");
         Scene scene = new Scene(start, 900, 900);
