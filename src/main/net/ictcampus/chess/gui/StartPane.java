@@ -5,7 +5,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import net.ictcampus.chess.App;
 import net.ictcampus.chess.Controller;
 import net.ictcampus.chess.model.Chess;
 

@@ -5,16 +5,15 @@ import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import net.ictcampus.chess.App;
-import net.ictcampus.chess.Controller;
+import net.ictcampus.chess.ChessApp;
 
 public class Style {
 
     public static void setStyleSheet(Pane pane, String stylesheet){
-        pane.getStylesheets().add(App.class.getResource(stylesheet).toExternalForm());
+        pane.getStylesheets().add(ChessApp.class.getResource(stylesheet).toExternalForm());
     }
     public static void setStyleSheet(Scene scene, String stylesheet){
-        scene.getStylesheets().add(App.class.getResource(stylesheet).toExternalForm());
+        scene.getStylesheets().add(ChessApp.class.getResource(stylesheet).toExternalForm());
     }
 
     public static void setStyleClass(Node node, String className){
