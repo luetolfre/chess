@@ -2,35 +2,26 @@ package net.ictcampus.chess.model;
 
 import net.ictcampus.chess.constant.Color;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
     private String username;
     private Color color;
-    private List<Piece> pieces;
 
-    public Player(String username, Color color, List<Piece> piecesList) {
+    public Player(String username, Color color) {
         this.username = username;
         this.color = color;
-        this.pieces = createPieces(piecesList);
     }
 
-    private List<Piece> createPieces(List<Piece> pieceList){
-        List<Piece> myPieces = new ArrayList<>();
-        for (Piece piece:pieceList){
-            if (piece.getColor() == this.color){
-                myPieces.add(piece);
-            }
-        }
-        return myPieces;
+    public boolean isWhite(){
+        return this.color == Color.WHITE;
     }
 
-    public void addPiece(){
-        //TODO
+    public String getUsername() {
+        return username;
     }
 
-    public void removePiece(){
-        //TODO
+    public Color getColor() {
+        return color;
     }
 }

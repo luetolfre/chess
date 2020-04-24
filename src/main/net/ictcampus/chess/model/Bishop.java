@@ -16,32 +16,24 @@ import java.util.List;
  */
 public class Bishop extends Piece {
 
+    private static final String IMG = "bishop.png";
     private final String imagePath;
     private List<Position> possibleMoves;
 
     /**
      * Initializes a new Bishop object.
-     * @param row which row it is on the Board
-     * @param col which column it is on the Board
      * @param color which color it has
      */
-    public Bishop(int row, int col, Color color) {
-        super(row, col, color);
-        this.imagePath = (color == Color.BLACK) ? "res/img/bishop_b.png" : "res/img/bishop_w.png";
-        this.possibleMoves = updatePossibleMoves();
+    public Bishop(Color color) {
+        super( color);
+        this.imagePath = (color == Color.BLACK) ? "res/img/b/"+IMG : "res/img/w/" + IMG;
     }
 
     @Override
-    public void move() {
-        //TODO
+    public boolean isMovable(Board board, Position start, Position end) {
+        return false;
     }
 
-    @Override
-    public List<Position> updatePossibleMoves() {
-        List<Position> possibleMoves = new ArrayList<>();
-        //TODO
-        return possibleMoves;
-    }
 
     @Override
     public String getImagePath() {

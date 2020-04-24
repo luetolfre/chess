@@ -4,22 +4,22 @@ import net.ictcampus.chess.constant.Color;
 
 public class Knight extends Piece {
 
+    private static final String IMG = "knight.png";
     private String imagePath;
 
-    public Knight(int row, int col, Color color) {
-        super(row, col, color);
-        this.imagePath = (color == Color.BLACK) ? "res/img/knight_b.png" : "res/img/knight_w.png";
+    public Knight(Color color) {
+        super(color);
+        this.imagePath = (color == Color.BLACK) ? "res/img/b/"+IMG : "res/img/w/" + IMG;
 
     }
 
     @Override
-    public void move() {
-        //TODO
-    }
+    public boolean isMovable(Board board, Position start, Position end) {
 
-    @Override
-    public void updatePossibleMoves() {
-        //TODO
+        if(end.isSameColor(this.getColor())) return false;
+        int col = Math.abs(start.getCol() - end.getCol());
+        int row = Math.abs(start.getRow() - end.getRow());
+        return row*col ==2;
     }
 
     @Override

@@ -17,6 +17,7 @@ import javafx.scene.shape.Rectangle;
 import net.ictcampus.chess.Controller;
 import net.ictcampus.chess.model.Chess;
 import net.ictcampus.chess.model.Piece;
+import net.ictcampus.chess.model.Position;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -27,12 +28,12 @@ public class BoardGrid extends GridPane {
     private Chess game;
     final static int SIZE = 8;
     private List<Rectangle> tiles;
-    private List<Piece> pieces;
+    private List<Position> pieces;
 
 
     public BoardGrid(Chess game) throws FileNotFoundException {
         this.game = game;
-        this.pieces = Controller.createObservablePieces(game.getPieces());
+        this.pieces = Controller.createObservablePieces(game.getBoard().getTiles());
         this.createBoard();
         this.updatePieces();
         this.style();
@@ -58,8 +59,8 @@ public class BoardGrid extends GridPane {
     }
 
     private void updatePieces() throws FileNotFoundException {
-        for (Piece p : pieces){
-            this.add(getImage(p.getImagePath()), p.getRow(), p.getCol());
+        for (Position p : pieces){
+            this.add(getImage(p.getPiece().getImagePath()), p.getCol(), p.getRow());
         }
     }
 

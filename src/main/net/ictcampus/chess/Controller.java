@@ -9,8 +9,10 @@ import net.ictcampus.chess.gui.EndPane;
 import net.ictcampus.chess.gui.Style;
 import net.ictcampus.chess.model.Chess;
 import net.ictcampus.chess.model.Piece;
+import net.ictcampus.chess.model.Position;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,10 +43,18 @@ public class Controller {
 
     /**
      * Makes pieces from Game observable from Front-End
-     * @param pieces List of all Pieces in the Game
+     * @param board the board of the game
      * @return the observable Pieces List
      */
-    public static List<Piece> createObservablePieces(List<Piece> pieces){
+    public static List<Position> createObservablePieces(Position[][] board){
+        List<Position> pieces = new ArrayList<>();
+        for (int i= 0; i<8; i++){
+            for (int j=0; j<8; j++){
+                if(board[i][j].getPiece() != null){
+                    pieces.add(board[i][j]);
+                }
+            }
+        }
         // TODO make binding in pieces.
         return pieces;
     }
