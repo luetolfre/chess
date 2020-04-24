@@ -14,35 +14,30 @@ import java.io.FileNotFoundException;
 import java.util.List;
 
 public class Controller {
-    Chess chess;
-
-    public Controller() {
-    }
-
 
     public static void play(){
 
     }
 
-    private void createGame(String player1, String player2){
-        this.chess = new Chess(player1, player2);
+    private static Chess createGame(String player1, String player2){
+        return new Chess(player1, player2);
     }
 
-    public List<Piece> createObservablePieces(){
+    public static List<Piece> createObservablePieces(List<Piece> pieces){
         // TODO make binding in pieces.
-        return this.chess.getPieces();
+        return pieces;
     }
 
-    public void showGamePane(Stage stage) throws FileNotFoundException {
-        showPane(stage, new ChessPane(this, stage, "CHESS"));
-        createGame("p1", "p2");
+    public static void showGamePane(Stage stage) throws FileNotFoundException {
+        Chess game = createGame("p1", "p2");
+        showPane(stage, new ChessPane(game, stage, "CHESS"));
     }
 
-    public void showEndPane(Stage stage){
-        showPane(stage, new EndPane(this, stage, "CHESS"));
+    public static void showEndPane(Chess game, Stage stage){
+        showPane(stage, new EndPane(game, stage, "CHESS"));
     }
 
-    private void showPane(Stage stage, Pane pane){
+    private static void showPane(Stage stage, Pane pane){
         Scene scene = new Scene(pane, 800, 800);
         Style.setStyleSheet(scene, "/css/main.css");
         stage.setScene(scene);

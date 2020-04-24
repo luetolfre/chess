@@ -6,17 +6,18 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import net.ictcampus.chess.Controller;
+import net.ictcampus.chess.model.Chess;
 
 public class EndPane extends BorderPane {
 
-    private final Controller CONTROLLER;
+    private final Chess GAME;
     private final Stage STAGE;
     private final Text TITLE;
     private final Button BUTTON;
 
 
-    public EndPane(Controller CONTROLLER, Stage STAGE, String TITLE) {
-        this.CONTROLLER = CONTROLLER;
+    public EndPane(Chess game, Stage STAGE, String TITLE) {
+        this.GAME = game;
         this.STAGE = STAGE;
         this.TITLE = new Text(TITLE);
         this.BUTTON = new Button("end game");

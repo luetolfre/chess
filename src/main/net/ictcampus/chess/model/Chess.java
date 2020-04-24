@@ -76,13 +76,40 @@ public class Chess {
         return pieces;
     }
 
-    public boolean isEmpty(Position pos){
-        // TODO
-        return false;
-    }
-
 
     public List<Piece> getPieces() {
         return pieces;
+    }
+
+    public boolean isEmpty(int row, int col){
+        return getPiece(row,col) == null;
+    }
+    public boolean isPiece(int row, int col){
+        return getPiece(row, col) != null;
+    }
+
+    public Piece getPiece(int row, int col){
+        for( Piece p: this.getPieces()){
+            if(p.getRow()==row && p.getCol()==col) return p;
+        }
+        return null;
+    }
+
+    public boolean isYourPiece(int row, int col, Color color){
+        if(isPiece(row, col)){
+            return getPiece(row,col).getColor() == color;
+        }
+        return false;
+    }
+
+    public boolean isOtherPiece(int row, int col, Color color){
+        if(isPiece(row, col)){
+            return getPiece(row,col).getColor() != color;
+        }
+        return false;
+    }
+
+    public boolean isOnBoard(int row, int col){
+        return 0<=row && row <8 && 0<=col && col<8;
     }
 }

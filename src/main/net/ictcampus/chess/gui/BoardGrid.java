@@ -15,6 +15,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.shape.Rectangle;
 import net.ictcampus.chess.Controller;
+import net.ictcampus.chess.model.Chess;
 import net.ictcampus.chess.model.Piece;
 
 import java.io.FileInputStream;
@@ -23,15 +24,15 @@ import java.util.List;
 
 public class BoardGrid extends GridPane {
 
-    private final Controller CONTROLLER;
+    private Chess game;
     final static int SIZE = 8;
     private List<Rectangle> tiles;
     private List<Piece> pieces;
 
 
-    public BoardGrid(Controller controller) throws FileNotFoundException {
-        this.CONTROLLER = controller;
-        this.pieces = this.CONTROLLER.createObservablePieces();
+    public BoardGrid(Chess game) throws FileNotFoundException {
+        this.game = game;
+        this.pieces = Controller.createObservablePieces(game.getPieces());
         this.createBoard();
         this.updatePieces();
         this.style();
