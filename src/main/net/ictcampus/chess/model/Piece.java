@@ -18,7 +18,6 @@ public abstract class Piece {
 
     public abstract void move();
     public abstract void updatePossibleMoves();
-    public abstract List<Position> getCandidates();
 
 
     public Color getColor() {

@@ -28,27 +28,16 @@ public class Pawn extends Piece {
 
     @Override
     public void updatePossibleMoves() {
-        // possibilities: 1vor, 1livor, 1revor
+        // possibilities: 1U, 1UL, 1UR
         // TODO add possible moves???
         Position candidate = new Position(this.row+getColor().getDir(), this.col);
+        //new Position(this.row+getColor().getDir(), this.col);
+        //.add(new Position(this.row+getColor().getDir(), this.col+1));
+        //.add(new Position(this.row+getColor().getDir(), this.col-1));
         List<Position> positions = new ArrayList<>();
 
 
         //TODO
-    }
-
-    @Override
-    public List<Position> getCandidates() {
-        List<Position> candidates = new ArrayList<>();
-        if(queen){
-            //TODO queenCandidates
-        }
-        else{
-            candidates.add(new Position(this.row+getColor().getDir(), this.col));
-            candidates.add(new Position(this.row+getColor().getDir(), this.col+1));
-            candidates.add(new Position(this.row+getColor().getDir(), this.col-1));
-        }
-        return candidates;
     }
 
     @Override

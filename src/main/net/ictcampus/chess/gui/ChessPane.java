@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 
 public class ChessPane extends BorderPane {
 
+    private final Chess GAME;
     private final Stage STAGE;
     private final Text TITLE;
     private final GridPane BOARD;
@@ -19,6 +20,7 @@ public class ChessPane extends BorderPane {
 
 
     public ChessPane(Chess game, Stage STAGE, String TITLE) throws FileNotFoundException {
+        this.GAME = game;
         this.STAGE = STAGE;
         this.TITLE = new Text(TITLE);
         this.BOARD = new BoardGrid(game);
@@ -28,7 +30,7 @@ public class ChessPane extends BorderPane {
     }
 
     private void setup() {
-        this.BUTTON.setOnAction(event -> {Controller.showEndPane(STAGE);});
+        this.BUTTON.setOnAction(event -> {Controller.showEndPane(this.GAME, STAGE);});
         this.setCenter(this.BOARD);
         //this.setLeft(createVBoxText("player1"));
         //this.setRight(createVBoxText("player2"));

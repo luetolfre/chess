@@ -28,8 +28,8 @@ public class Controller {
         return pieces;
     }
 
-    public static void showGamePane(Stage stage) throws FileNotFoundException {
-        Chess game = createGame("p1", "p2");
+    public static void showGamePane(Chess game, Stage stage) throws FileNotFoundException {
+        // createGame("p2", "p1");
         showPane(stage, new ChessPane(game, stage, "CHESS"));
     }
 
