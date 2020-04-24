@@ -37,8 +37,7 @@ public class Chess {
     }
 
     /**
-     * u
-     * pdates the whole Chess object
+     * updates the whole Chess object
      */
     public void update(){
         //TODO
@@ -98,7 +97,7 @@ public class Chess {
         end.setPiece(movingPiece);
         start.setPiece(null);
 
-        if (killedPiece != null && killedPiece instanceof King){
+        if (killedPiece instanceof King){
             if(player.getColor()==Color.WHITE){
                 this.setStatus(GameStatus.WIN_WHITE);
             }else{

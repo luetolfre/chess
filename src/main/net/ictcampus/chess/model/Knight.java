@@ -5,21 +5,19 @@ import net.ictcampus.chess.constant.Color;
 public class Knight extends Piece {
 
     private static final String IMG = "knight.png";
-    private String imagePath;
+    private final String imagePath;
 
     public Knight(Color color) {
         super(color);
         this.imagePath = (color == Color.BLACK) ? "res/img/b/"+IMG : "res/img/w/" + IMG;
-
     }
 
     @Override
     public boolean isMovable(Board board, Position start, Position end) {
-
         if(end.isSameColor(this.getColor())) return false;
         int col = Math.abs(start.getCol() - end.getCol());
         int row = Math.abs(start.getRow() - end.getRow());
-        return row*col ==2;
+        return row*col == 2;
     }
 
     @Override

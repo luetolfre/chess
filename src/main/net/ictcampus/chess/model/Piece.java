@@ -35,4 +35,9 @@ public abstract class Piece {
     public void setAlive(boolean alive) {
         this.alive = alive;
     }
+
+    public void setPossibleMoves(List<Position> possibleMoves) {
+        this.possibleMoves = possibleMoves;
+    }
+
 }

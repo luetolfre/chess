@@ -5,7 +5,7 @@ import net.ictcampus.chess.constant.Color;
 public class Rook extends Piece {
 
     private static final String IMG = "rook.png";
-    private String imagePath;
+    private final String imagePath;
 
     public Rook(Color color) {
         super(color);
@@ -15,7 +15,25 @@ public class Rook extends Piece {
 
     @Override
     public boolean isMovable(Board board, Position start, Position end) {
-        return false;
+        if (end.isSameColor(this.getColor())) return false;
+
+        if(start.getCol()==end.getCol()){
+            int maxRow = Math.max(start.getRow(), end.getRow());
+            int minRow = Math.min(start.getRow(), end.getRow());
+            for (int r = minRow+1; r<maxRow; r++) {
+                if(board.getTiles()[r][start.getCol()].isPiece()) return false;
+            }
+            return true;
+        }else if(start.getRow()==end.getRow()){
+            int maxCol = Math.max(start.getCol(), end.getCol());
+            int minCol = Math.min(start.getCol(), end.getCol());
+            for (int c = minCol+1; c<maxCol; c++){
+                if(board.getTiles()[start.getRow()][c].isPiece()) return false;
+            }
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override

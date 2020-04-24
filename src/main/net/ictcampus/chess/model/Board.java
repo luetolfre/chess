@@ -2,6 +2,9 @@ package net.ictcampus.chess.model;
 
 import net.ictcampus.chess.constant.Color;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Board {
     private static final int SIZE = 8;
     private Position[][] tiles;
@@ -47,91 +50,43 @@ public class Board {
             throw new Exception("Index out of Bound");
         }
         return tiles[row][col];
-
     }
 
     public Position[][] getTiles() {
         return tiles;
     }
-    /*
-    private List<Position> createBoard() {
-        List<Position> board = new ArrayList<>();
-        for (int y=0; y<SIZE; y++){
-            for (int x=0; x<SIZE; x++){
-                board.add(new Position(x,y));
-            }
-        }
-        return board;
-    }
-
-     */
-
-    /*
-    private List<Piece> createPieces(){
-        List<Piece> pieces = new ArrayList<>();
-        for (int i = 0; i<SIZE; i++){
-            pieces.add(new Pawn(1,i, Color.BLACK));
-            pieces.add(new Pawn(6,i, Color.WHITE));
-        }
-        pieces.add(new Rook(0,0, Color.BLACK));
-        pieces.add(new Rook(0,7, Color.BLACK));
-        pieces.add(new Rook(7,0, Color.WHITE));
-        pieces.add(new Rook(7,7, Color.WHITE));
-
-        pieces.add(new Knight(0,1, Color.BLACK));
-        pieces.add(new Knight(0,6, Color.BLACK));
-        pieces.add(new Knight(7,1, Color.WHITE));
-        pieces.add(new Knight(7,6, Color.WHITE));
-
-        pieces.add(new Bishop(0,2, Color.BLACK));
-        pieces.add(new Bishop(0,5, Color.BLACK));
-        pieces.add(new Bishop(7,2, Color.WHITE));
-        pieces.add(new Bishop(7,5, Color.WHITE));
-
-        pieces.add(new Queen(0,3, Color.BLACK));
-        pieces.add(new Queen(7,3, Color.WHITE));
-
-        pieces.add(new King(0,4, Color.BLACK));
-        pieces.add(new King(7,4, Color.WHITE));
-
-        return pieces;
-    }
-
-    public List<Piece> getPieces() {
-        return pieces;
-    }
 
     public boolean isEmpty(int row, int col){
-        return getPiece(row,col) == null;
+        return tiles[row][col].getPiece() == null;
     }
     public boolean isPiece(int row, int col){
-        return getPiece(row, col) != null;
+        return tiles[row][col].getPiece() != null;
     }
 
-    public Piece getPiece(int row, int col){
-        for( Piece p: this.getPieces()){
-            if(p.getRow()==row && p.getCol()==col) return p;
+    public Piece getPiece(int row, int col) throws Exception {
+        if (row<0 || row>=SIZE || col<0 || col>=SIZE){
+            throw new Exception("Index out of Bound");
         }
-        return null;
+        return tiles[row][col].getPiece();
     }
 
-    public boolean isYourPiece(int row, int col, Color color){
-        if(isPiece(row, col)){
-            return getPiece(row,col).getColor() == color;
-        }
-        return false;
-    }
-
-    public boolean isOtherPiece(int row, int col, Color color){
-        if(isPiece(row, col)){
-            return getPiece(row,col).getColor() != color;
-        }
-        return false;
+    public boolean isWhitePiece(int row, int col){
+        return tiles[row][col].getPiece().getColor() == Color.WHITE;
     }
 
     public boolean isOnBoard(int row, int col){
         return 0<=row && row <8 && 0<=col && col<8;
     }
 
-     */
+    public void updatePossibleMoves(Position pos){
+        List<Position> possibleMoves = new ArrayList<>();
+        for (int row=0; row<SIZE; row++){
+            for(int col=0; col<SIZE; col++){
+                if(pos.getPiece().isMovable(this, pos, this.tiles[row][col])){
+                    possibleMoves.add(this.tiles[row][col]);
+                }
+            }
+        }
+        pos.getPiece().setPossibleMoves(possibleMoves);
+    }
 }

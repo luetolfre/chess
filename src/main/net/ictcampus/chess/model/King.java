@@ -5,7 +5,7 @@ import net.ictcampus.chess.constant.Color;
 public class King extends Piece{
 
     private static final String IMG = "king.png";
-    private String imagePath;
+    private final String imagePath;
     private boolean hasCastled;
 
     public King(Color color) {
@@ -18,9 +18,11 @@ public class King extends Piece{
     @Override
     public boolean isMovable(Board board, Position start, Position end) {
         if (end.isSameColor(this.getColor())) return false;
+
         int col = Math.abs(start.getCol() - end.getCol());
         int row = Math.abs(start.getRow() - end.getRow());
         if (row+col == 1 && !this.isAttacked(end)) return true;
+
         return this.isValidCastling(board, start, end);
     }
 
