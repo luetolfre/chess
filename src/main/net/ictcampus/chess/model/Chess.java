@@ -33,6 +33,10 @@ public class Chess {
         //TODO
     }
 
+    public void endGame(){
+        //TODO
+    }
+
     private List<Player> createPlayerList(String player1, String player2, List<Piece> pieceList) {
         List<Player> players = new ArrayList<>();
         players.add(new Player(player1, Color.WHITE, pieceList));

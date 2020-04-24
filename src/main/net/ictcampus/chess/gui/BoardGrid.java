@@ -24,14 +24,14 @@ import java.util.List;
 
 public class BoardGrid extends GridPane {
 
-    private Chess game;
+    private Chess GAME;
     final static int SIZE = 8;
     private List<Rectangle> tiles;
     private List<Piece> pieces;
 
 
     public BoardGrid(Chess game) throws FileNotFoundException {
-        this.game = game;
+        this.GAME = game;
         this.pieces = Controller.createObservablePieces(game.getPieces());
         this.createBoard();
         this.updatePieces();
