@@ -28,8 +28,8 @@ public class StartPane extends BorderPane {
 
     private void style(){
         Style.setStyleSheet(this, "/css/start.css");
-        Style.setStyleClass(this.TITLE, "scene-title");
-        Style.setStyleClass(this.BUTTON, "play-button");
+        Style.addStyleClass(this.TITLE, "scene-title");
+        Style.addStyleClass(this.BUTTON, "play-button");
     }
 
     private void setup(){

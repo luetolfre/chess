@@ -1,5 +1,7 @@
 .chess-pane{
     -fx-alignment: center;
+    -fx-hgap: 1;
+    -fx-vgap: 1;
 }
 .board{
     -fx-max-width: 750px;
@@ -7,6 +9,9 @@
 }
 
 .tile{
+}
+.highlight{
+    -fx-stroke: indianred;
 }
 
 .piece{
@@ -18,7 +23,6 @@
 .light-tile{
     -fx-fill: lightgray;
     -fx-background-color: lightgray;
-
 }
 
 .dark-tile{

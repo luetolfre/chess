@@ -144,4 +144,8 @@ public class Chess {
         }
     }
 
+    public Player getCurrPlayer() {
+        return currPlayer;
+    }
+
 }

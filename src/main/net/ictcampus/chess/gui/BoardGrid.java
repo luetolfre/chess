@@ -2,21 +2,19 @@ package net.ictcampus.chess.gui;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.geometry.VPos;
+import javafx.scene.Node;
 import javafx.scene.control.Control;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
 import net.ictcampus.chess.Controller;
+import net.ictcampus.chess.constant.Color;
+import net.ictcampus.chess.model.Board;
 import net.ictcampus.chess.model.Chess;
-import net.ictcampus.chess.model.Piece;
 import net.ictcampus.chess.model.Position;
 
 import java.io.FileInputStream;
@@ -25,10 +23,11 @@ import java.util.List;
 
 public class BoardGrid extends GridPane {
 
-    private Chess GAME;
-    final static int SIZE = 8;
+    private final Chess GAME;
+    private final static int SIZE = 8;
     private List<Rectangle> tiles;
     private List<Position> pieces;
+    private Position currPosition;
 
 
     public BoardGrid(Chess game) throws FileNotFoundException {
@@ -45,12 +44,22 @@ public class BoardGrid extends GridPane {
             for (int col = 0; col<SIZE; col++){
                 //StackPane tile = new StackPane();
                 Rectangle tile = new Rectangle();
-                Style.setStyleClass(tile,"tile");
+                Style.addStyleClass(tile,"tile");
                 if ((row + col) % 2 == 0) {
-                    Style.setStyleClass(tile, "light-tile");
+                    Style.addStyleClass(tile, "light-tile");
                 } else {
-                    Style.setStyleClass(tile, "dark-tile");
+                    Style.addStyleClass(tile, "dark-tile");
                 }
+
+                int finalRow = row;
+                int finalCol = col;
+                tile.setOnMouseClicked(event -> {
+                    try {
+                        checkTile(finalRow, finalCol);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
                 bindSize(tile, this, col, row);
                 this.add(tile, col, row);
             }
@@ -59,15 +68,23 @@ public class BoardGrid extends GridPane {
     }
 
     private void updatePieces() throws FileNotFoundException {
-        for (Position p : pieces){
-            this.add(getImage(p.getPiece().getImagePath()), p.getCol(), p.getRow());
+        for (Position position : pieces){
+            ImageView img = getImage(position.getPiece().getImagePath());
+            img.setOnMouseClicked(event -> {
+                try {
+                    checkPiece(img, position);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            this.add(img, position.getCol(), position.getRow());
         }
     }
 
     private ImageView getImage(String path) throws FileNotFoundException {
         Image image = new Image(new FileInputStream(path));
         ImageView img = new ImageView(image);
-        Style.setStyleClass(img, "piece-img");
+        Style.addStyleClass(img, "piece-img");
         return img;
     }
 
@@ -92,7 +109,63 @@ public class BoardGrid extends GridPane {
 
     private void style(){
         Style.setStyleSheet(this, "/css/chess.css");
-        Style.setStyleClass(this, "board");
+        Style.addStyleClass(this, "board");
+    }
+
+    private void checkPiece(ImageView img, Position position) throws Exception {
+        Board board = this.GAME.getBoard();
+        Color color =this.GAME.getCurrPlayer().getColor();
+        if(board.isColoredPiece(position.getRow(),position.getCol(),color)) {
+            for (Node node : this.getChildren()) {
+                Style.delStyleClass(node, "highlight");
+            }
+            this.GAME.getBoard().updatePossibleMoves(position);
+            List<Position> possibilities = position.getPiece().getPossibleMoves();
+            System.out.println("-----");
+            setCurrPosition(position);
+            for (Position p : possibilities) {
+                Node node = Controller.getNode(this, p.getRow(), p.getCol());
+                assert node != null;
+                Style.addStyleClass(node, "highlight");
+                node.setOnMouseClicked(e -> {
+                    try {
+                        if(Controller.doMove(GAME, currPosition, p)){
+                            //GAME.getBoard().printBoard();
+                            this.getChildren().remove(img);
+                            img.setOnMouseClicked(event -> {
+                                try {
+                                    checkPiece(img, position);
+                                } catch (Exception exception) {
+                                    exception.printStackTrace();
+                                }
+                            });
+                            this.add(img, p.getCol(), p.getRow());
+                            for (Node n : this.getChildren()) {
+                                Style.delStyleClass(n, "highlight");
+                            }
+                        };
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                });
+                System.out.println(p.getRow() + " " + p.getCol());
+            }
+        }
+
+    }
+
+    private void checkTile(int row, int col) throws Exception {
+        Board board = this.GAME.getBoard();
+        Color color =this.GAME.getCurrPlayer().getColor();
+        if(board.isPiece(row,col) && board.getPiece(row,col).getColor()==color){
+            ImageView img = getImage(board.getPiece(row, col).getImagePath());
+            checkPiece(img, this.GAME.getBoard().getTile(row,col));
+        }
+    }
+
+
+    public void setCurrPosition(Position currPosition) {
+        this.currPosition = currPosition;
     }
 
 }

@@ -70,8 +70,9 @@ public class Board {
         return tiles[row][col].getPiece();
     }
 
-    public boolean isWhitePiece(int row, int col){
-        return tiles[row][col].getPiece().getColor() == Color.WHITE;
+    public boolean isColoredPiece(int row, int col, Color color) throws Exception {
+        if(isPiece(row, col)) return getPiece(row, col).getColor() == color;
+        else return false;
     }
 
     public boolean isOnBoard(int row, int col){
@@ -88,5 +89,16 @@ public class Board {
             }
         }
         pos.getPiece().setPossibleMoves(possibleMoves);
+    }
+
+    public void printBoard() {
+        for (Position[] row : tiles) {
+            for (Position p : row) {
+                if (p.getPiece() != null) System.out.print(p.getPiece().getImagePath()+ ", ");
+                else System.out.print(p.getPiece() + ", ");
+
+            }
+            System.out.println();
+        }
     }
 }

@@ -40,4 +40,13 @@ public abstract class Piece {
         this.possibleMoves = possibleMoves;
     }
 
+    public List<Position> getPossibleMoves() {
+        return possibleMoves;
+    }
+
+    public boolean isAlive() {
+        return alive;
+    }
+
+
 }

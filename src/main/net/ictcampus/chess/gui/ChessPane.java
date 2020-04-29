@@ -39,16 +39,16 @@ public class ChessPane extends BorderPane {
 
     private void style(){
         Style.setStyleSheet(this, "/css/chess.css");
-        Style.setStyleClass(this, "chess-pane");
-        Style.setStyleClass(this.TITLE, "scene-title");
-        Style.setStyleClass(this.BOARD, "board");
-        Style.setStyleClass(this.BUTTON, "play-button");
+        Style.addStyleClass(this, "chess-pane");
+        Style.addStyleClass(this.TITLE, "scene-title");
+        Style.addStyleClass(this.BOARD, "board");
+        Style.addStyleClass(this.BUTTON, "play-button");
     }
     private VBox createVBoxText(String string){
         Text text = new Text(string);
-        Style.setStyleClass(text, "player-name");
+        Style.addStyleClass(text, "player-name");
         VBox vBox = Style.addToVBox(text);
-        Style.setStyleClass(vBox, "player-v-box");
+        Style.addStyleClass(vBox, "player-v-box");
         return vBox;
     }
 

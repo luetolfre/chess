@@ -1,8 +1,13 @@
 package net.ictcampus.chess;
 
+import javafx.css.PseudoClass;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import net.ictcampus.chess.gui.ChessPane;
 import net.ictcampus.chess.gui.EndPane;
@@ -90,6 +95,31 @@ public class Controller {
         stage.setScene(scene);
         //stage.setFullScreen(true);
         stage.show();
+    }
+
+
+    public static void checkPiece(Chess game, Position position){
+        game.getBoard().updatePossibleMoves(position);
+        List<Position> possibilities = position.getPiece().getPossibleMoves();
+        System.out.println("-----");
+        for (Position p:possibilities) {
+            //Node node =
+            System.out.println(p.getRow() + " " + p.getCol());
+        }
+    }
+
+    public static Node getNode(GridPane grid, int row, int col){
+        for (Node node:grid.getChildren()) {
+            if (grid.getRowIndex(node)== row && grid.getColumnIndex(node)== col){
+                return node;
+            }
+        }
+        return null;
+    }
+
+    public static boolean doMove(Chess game, Position start, Position end) throws Exception {
+        return game.move(game.getCurrPlayer(), start, end);
+
     }
 
 }

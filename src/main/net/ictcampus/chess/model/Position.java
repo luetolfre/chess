@@ -38,8 +38,16 @@ public class Position {
     public boolean isPiece(){
         return this.piece != null;
     }
+    public boolean isEmpty(){ return this.piece == null;}
     public boolean isSameColor(Color color){
+        if(this.isEmpty()) return false;
         return this.piece.getColor() == color;
+    }
+    public boolean isEnemy(Position position){
+        if(this.isPiece()&& position.isPiece()){
+            return !this.isSameColor(position.getPiece().getColor());
+        }
+        return false;
     }
 
     public int getRow() {

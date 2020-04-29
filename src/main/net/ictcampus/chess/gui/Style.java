@@ -16,21 +16,25 @@ public class Style {
         scene.getStylesheets().add(ChessApp.class.getResource(stylesheet).toExternalForm());
     }
 
-    public static void setStyleClass(Node node, String className){
+    public static void addStyleClass(Node node, String className){
         node.getStyleClass().add(className);
     }
 
     public static HBox addToHBox(Node... nodes){
         HBox hBox = new HBox();
-        setStyleClass(hBox, "h-box");
+        addStyleClass(hBox, "h-box");
         hBox.getChildren().addAll(nodes);
         return hBox;
     }
 
     public static VBox addToVBox(Node... nodes){
         VBox vBox = new VBox();
-        setStyleClass(vBox, "h-box");
+        addStyleClass(vBox, "h-box");
         vBox.getChildren().addAll(nodes);
         return vBox;
+    }
+
+    public static void delStyleClass(Node node, String className){
+        node.getStyleClass().removeAll(className);
     }
 }
