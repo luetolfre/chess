@@ -89,7 +89,7 @@ public class Chess {
             move.setKilledPiece(killedPiece);
         }
 
-        if(movingPiece instanceof King && ((King) movingPiece).isCastlingMove(start, end)){
+        if(movingPiece instanceof King && ((King) movingPiece).isCastlingMove(board, start, end)){
             move.setCastling(true);
         }
         history.add(move);

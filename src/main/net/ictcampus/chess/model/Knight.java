@@ -2,10 +2,14 @@ package net.ictcampus.chess.model;
 
 import net.ictcampus.chess.constant.Color;
 
+import java.util.List;
+
 public class Knight extends Piece {
 
     private static final String IMG = "knight.png";
     private final String imagePath;
+    private List<Position> possibleMoves;
+
 
     public Knight(Color color) {
         super(color);

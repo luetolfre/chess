@@ -2,6 +2,7 @@ package net.ictcampus.chess.model;
 
 import net.ictcampus.chess.constant.Color;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Piece {
@@ -12,6 +13,7 @@ public abstract class Piece {
 
     public Piece(Color color) {
         this.color = color;
+        this.possibleMoves = new ArrayList<>();
     }
 
     /**
