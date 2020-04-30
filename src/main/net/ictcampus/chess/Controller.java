@@ -94,15 +94,6 @@ public class Controller {
     }
 
 
-    public static void checkPiece(Chess game, Position position){
-        game.getBoard().update();
-        List<Position> possibilities = position.getPiece().getPossibleMoves();
-        System.out.println("-----");
-        for (Position p:possibilities) {
-            //Node node =
-            System.out.println(p.getRow() + " " + p.getCol());
-        }
-    }
 
     public static Node getNode(GridPane grid, int row, int col){
         for (Node node:grid.getChildren()) {

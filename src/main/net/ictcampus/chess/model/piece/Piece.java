@@ -76,33 +76,33 @@ public abstract class Piece {
         if(!(Math.abs(start.getRow()-end.getRow())==Math.abs(start.getCol()-end.getCol()))) return false;
 
         int steps = Math.abs(start.getRow()-end.getRow());
-        int startrow = start.getRow();
-        int endrow = end.getRow();
-        int startcol = start.getCol();
-        int endcol = end.getCol();
+        int startRow = start.getRow();
+        int endRow = end.getRow();
+        int startCol = start.getCol();
+        int endCol = end.getCol();
         Position[][] tiles = board.getTiles();
-        if(startrow>endrow && startcol>endcol){             //upleft
+        if(startRow>endRow && startCol>endCol){             //upLeft
             for (int i=1; i<steps; i++){
-                if(tiles[startrow-i][startcol-i].isPiece()) return false;
+                if(tiles[startRow-i][startCol-i].isPiece()) return false;
             }
-        }else if(startrow>endrow && startcol<endcol){        //upright
+        }else if(startRow>endRow && startCol<endCol){        //upRight
             for (int i=1; i<steps; i++){
-                if(tiles[startrow-i][startcol+i].isPiece()) return false;
+                if(tiles[startRow-i][startCol+i].isPiece()) return false;
             }
-        }else if(startrow<endrow && startcol<endcol){       //downright
+        }else if(startRow<endRow && startCol<endCol){       //downRight
             for (int i=1; i<steps; i++){
-                if(tiles[startrow+i][startcol+i].isPiece()) return false;
+                if(tiles[startRow+i][startCol+i].isPiece()) return false;
             }
-        }else if(startrow<endrow && startcol>endcol){       //downleft
+        }else if(startRow<endRow && startCol>endCol){       //downLeft
             for (int i=1; i<steps; i++){
-                if(tiles[startrow+i][startcol-i].isPiece()) return false;
+                if(tiles[startRow+i][startCol-i].isPiece()) return false;
             }
         }
         return true;
     }
 
     public boolean queenMovement(Board board, Position start, Position end){
-        return rookMovement(board, start, end) && bishopMovement(board, start, end);
+        return rookMovement(board, start, end) || bishopMovement(board, start, end);
     }
 
 

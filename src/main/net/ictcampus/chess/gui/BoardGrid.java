@@ -19,7 +19,9 @@ import net.ictcampus.chess.model.Position;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class BoardGrid extends GridPane {
 
@@ -33,6 +35,7 @@ public class BoardGrid extends GridPane {
     public BoardGrid(Chess game) throws FileNotFoundException {
         this.GAME = game;
         this.pieces = Controller.createObservablePieces(game.getBoard().getTiles());
+        this.tiles = new ArrayList<>();
         this.createBoard();
         this.updatePieces();
         this.style();
@@ -50,7 +53,7 @@ public class BoardGrid extends GridPane {
                 } else {
                     Style.addStyleClass(tile, "dark-tile");
                 }
-
+                //setMouseClickListener(tile);
                 int finalRow = row;
                 int finalCol = col;
                 tile.setOnMouseClicked(event -> {
@@ -61,6 +64,7 @@ public class BoardGrid extends GridPane {
                     }
                 });
                 bindSize(tile, this, col, row);
+                tiles.add(tile);
                 this.add(tile, col, row);
             }
         }
@@ -112,51 +116,59 @@ public class BoardGrid extends GridPane {
         Style.addStyleClass(this, "board");
     }
 
-    private void checkPiece(ImageView img, Position position) {
+    private void checkPiece(ImageView img, Position positionPiece) {
         Board board = this.GAME.getBoard();
         Color color =this.GAME.getCurrPlayer().getColor();
         unHighlight();
-        if(board.isColoredPiece(position.getRow(),position.getCol(),color)) {
+        if(board.isColoredPiece(positionPiece.getRow(),positionPiece.getCol(),color)) {
             this.GAME.getBoard().update();
-            List<Position> possibilities = position.getPiece().getPossibleMoves();
+            List<Position> possibilities = positionPiece.getPiece().getPossibleMoves();
             System.out.println("-----");
-            setCurrPosition(position);
-            for (Position p : possibilities) {
-                Node node = Controller.getNode(this, p.getRow(), p.getCol());
+            setCurrPosition(positionPiece);
+            for (Position possiblePosition : possibilities) {
+                Node node = Controller.getNode(this, possiblePosition.getRow(), possiblePosition.getCol());
                 assert node != null;
                 Style.addStyleClass(node, "highlight");
-                node.setOnMouseClicked(e -> {
+                node.setOnMouseClicked(e -> movable(img, possiblePosition, positionPiece));
+                    // TODO reset mouseclickevent after this.
+                    // TODO set Mouseclickevent outside of function
+
+                System.out.println(possiblePosition.getRow() + " " + possiblePosition.getCol());
+            }
+        }
+    }
+
+    private void movable(ImageView img, Position possiblePosition, Position position){
+        try {
+            if(Controller.doMove(GAME, currPosition, possiblePosition)){
+                //GAME.getBoard().printBoard();
+                this.getChildren().remove(getImage(possiblePosition.getRow(), possiblePosition.getCol()));
+                this.getChildren().remove(img);
+
+                this.add(img, possiblePosition.getCol(), possiblePosition.getRow());
+                /*
+                img.setOnMouseClicked(event -> {
                     try {
-                        if(Controller.doMove(GAME, currPosition, p)){
-                            //GAME.getBoard().printBoard();
-                            this.getChildren().remove(img);
-                            img.setOnMouseClicked(event -> {
-                                try {
-                                    checkPiece(img, position);
-                                } catch (Exception exception) {
-                                    exception.printStackTrace();
-                                }
-                            });
-                            this.add(img, p.getCol(), p.getRow());
-                            for (Node n : this.getChildren()) {
-                                Style.delStyleClass(n, "highlight");
-                            }
-                        };
+                        checkPiece(img, position);
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
-                });
-                System.out.println(p.getRow() + " " + p.getCol());
-            }
+                });*/
+                for (Node n : this.getChildren()) {
+                    Style.delStyleClass(n, "highlight");
+                }
+            };
+            setMouseClickListener();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
-
     }
 
     private void checkTile(int row, int col) throws Exception {
         Board board = this.GAME.getBoard();
         Color color =this.GAME.getCurrPlayer().getColor();
         if(board.isPiece(row,col) && board.getPiece(row,col).getColor()==color){
-            ImageView img = getImage(board.getPiece(row, col).getImagePath());
+            ImageView img = getImage(row, col); //getImage(board.getPiece(row, col).getImagePath());
             checkPiece(img, this.GAME.getBoard().getTile(row,col));
         }
     }
@@ -171,5 +183,40 @@ public class BoardGrid extends GridPane {
             Style.delStyleClass(node, "highlight");
         }
     }
+
+    private void setMouseClickListener(){
+        for (int row = 0; row<SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                int finalRow = row;
+                int finalCol = col;
+                Objects.requireNonNull(getNode(row, col)).setOnMouseClicked(event -> {
+                    try {
+                        checkTile(finalRow, finalCol);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
+        }
+    }
+
+    private Node getNode(int row, int col){
+        for (Node node:getChildren()) {
+            if (getRowIndex(node)== row && getColumnIndex(node)== col){
+                return node;
+            }
+        }
+        return null;
+    }
+
+    private ImageView getImage(int row, int col){
+        for (Node node:getChildren()) {
+            if (getRowIndex(node)== row && getColumnIndex(node)== col && node instanceof ImageView){
+                return (ImageView) node;
+            }
+        }
+        return null;
+    }
+
 
 }
