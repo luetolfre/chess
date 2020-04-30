@@ -112,14 +112,12 @@ public class BoardGrid extends GridPane {
         Style.addStyleClass(this, "board");
     }
 
-    private void checkPiece(ImageView img, Position position) throws Exception {
+    private void checkPiece(ImageView img, Position position) {
         Board board = this.GAME.getBoard();
         Color color =this.GAME.getCurrPlayer().getColor();
+        unHighlight();
         if(board.isColoredPiece(position.getRow(),position.getCol(),color)) {
-            for (Node node : this.getChildren()) {
-                Style.delStyleClass(node, "highlight");
-            }
-            this.GAME.getBoard().updatePossibleMoves(position);
+            this.GAME.getBoard().update();
             List<Position> possibilities = position.getPiece().getPossibleMoves();
             System.out.println("-----");
             setCurrPosition(position);
@@ -166,6 +164,12 @@ public class BoardGrid extends GridPane {
 
     public void setCurrPosition(Position currPosition) {
         this.currPosition = currPosition;
+    }
+
+    private void unHighlight(){
+        for (Node node : this.getChildren()) {
+            Style.delStyleClass(node, "highlight");
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 package net.ictcampus.chess.model;
 
 import net.ictcampus.chess.constant.Color;
+import net.ictcampus.chess.model.piece.Piece;
 
 public class Position {
     private int row;

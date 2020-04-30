@@ -1,5 +1,7 @@
 package net.ictcampus.chess.model;
 
+import net.ictcampus.chess.model.piece.Piece;
+
 public class Move {
 
     private Player player;

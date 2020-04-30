@@ -1,6 +1,8 @@
-package net.ictcampus.chess.model;
+package net.ictcampus.chess.model.piece;
 
 import net.ictcampus.chess.constant.Color;
+import net.ictcampus.chess.model.Board;
+import net.ictcampus.chess.model.Position;
 
 import java.util.List;
 

@@ -1,19 +1,15 @@
 package net.ictcampus.chess;
 
-import javafx.css.PseudoClass;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import net.ictcampus.chess.gui.ChessPane;
 import net.ictcampus.chess.gui.EndPane;
 import net.ictcampus.chess.gui.Style;
 import net.ictcampus.chess.model.Chess;
-import net.ictcampus.chess.model.Piece;
 import net.ictcampus.chess.model.Position;
 
 import java.io.FileNotFoundException;
@@ -99,7 +95,7 @@ public class Controller {
 
 
     public static void checkPiece(Chess game, Position position){
-        game.getBoard().updatePossibleMoves(position);
+        game.getBoard().update();
         List<Position> possibilities = position.getPiece().getPossibleMoves();
         System.out.println("-----");
         for (Position p:possibilities) {

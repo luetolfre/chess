@@ -1,8 +1,10 @@
 package net.ictcampus.chess.model;
 
-import javafx.util.Pair;
+import javafx.geometry.Pos;
 import net.ictcampus.chess.constant.Color;
 import net.ictcampus.chess.constant.GameStatus;
+import net.ictcampus.chess.model.piece.King;
+import net.ictcampus.chess.model.piece.Piece;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,20 +38,6 @@ public class Chess {
         this.history = new ArrayList<>();
     }
 
-    /**
-     * updates the whole Chess object
-     */
-    public void update(){
-        //TODO
-    }
-
-    /**
-     * Starts the Game
-     */
-    public void play(){
-        //TODO
-    }
-
 
     /**
      * Adds player to the list of players in the game
@@ -64,9 +52,22 @@ public class Chess {
         return players;
     }
 
+    /**
+     * Checks if a Chess Game is already over.
+     * @return true if it is over, false if it is still running
+     */
     public boolean isOver(){
         return this.status != GameStatus.RUNNING;
     }
+
+    /**
+     * Creates a Move from a Player of the start Position to the end Position
+     * @param player Player who tries to move
+     * @param start initial Position of Piece
+     * @param end Position where Piece should move to.
+     * @return true if the move is a possible Move
+     * @throws Exception if start or end is Out Of Range of the Board
+     */
     public boolean move(Player player, Position start, Position end) throws Exception {
         Position startTile = this.board.getTile(start.getRow(), start.getCol());
         Position endTile = this.board.getTile(end.getRow(), end.getCol());
@@ -74,14 +75,21 @@ public class Chess {
         return this.tryMove(move, player);
     }
 
-    private boolean tryMove(Move move, Player player){
+
+    /**
+     * Tries to make a move. Moves Piece, kills Piece, adds Piece to history, changes Gamestatus and changes currentPlayer.
+     * @param move Move that will be tried.
+     * @param player Player that tries that move.
+     * @return false if it is not a valid move. true if move was successful
+     */
+    private boolean tryMove(Move move, Player player)  {
         Position start = move.getStart();
         Position end = move.getEnd();
         Piece movingPiece = move.getMovingPiece();
-        if(movingPiece == null) return false;
-        if(player != currPlayer) return false;
-        if(movingPiece.getColor() != player.getColor()) return false;
-        if(!movingPiece.isMovable(board, start, end)) return false;
+        if (    movingPiece == null ||
+                player != currPlayer ||
+                movingPiece.getColor() != player.getColor() ||
+                !movingPiece.isMovable(board, start, end)) return false;
 
         Piece killedPiece = end.getPiece();
         if(killedPiece != null){
@@ -105,8 +113,20 @@ public class Chess {
             }
         }
         changeCurrentPlayer();
+        board.update();
 
         return true;
+    }
+
+    /**
+     * Changes the Current Player to the next one
+     */
+    private void changeCurrentPlayer(){
+        if (this.currPlayer == players.get(0)){
+            this.currPlayer = players.get(1);
+        }else{
+            this.currPlayer= players.get(0);
+        }
     }
 
 
@@ -118,30 +138,8 @@ public class Chess {
         this.board = board;
     }
 
-    public List<Player> getPlayers() {
-        return players;
-    }
-
-    public void setPlayers(List<Player> players) {
-        this.players = players;
-    }
-
-
-
-    public GameStatus getStatus() {
-        return status;
-    }
-
     public void setStatus(GameStatus status) {
         this.status = status;
-    }
-
-    private void changeCurrentPlayer(){
-        if (this.currPlayer == players.get(0)){
-            this.currPlayer = players.get(1);
-        }else{
-            this.currPlayer= players.get(0);
-        }
     }
 
     public Player getCurrPlayer() {

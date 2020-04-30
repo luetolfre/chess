@@ -1,13 +1,14 @@
 package net.ictcampus.chess;
 
+import net.ictcampus.chess.gui.StartPane;
+import net.ictcampus.chess.gui.Style;
+import net.ictcampus.chess.model.Chess;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import net.ictcampus.chess.gui.StartPane;
-import net.ictcampus.chess.gui.Style;
-import net.ictcampus.chess.model.Chess;
+
 
 /**
  * <h1>Chess Application</h1>
