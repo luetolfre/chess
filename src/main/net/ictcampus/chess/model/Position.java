@@ -23,7 +23,8 @@ public class Position {
     public String notate(int row, int col){
         char letter = 'A';
         int size = 8;
-        return String.valueOf((char)letter+row)+Integer.toString(size-col);
+        String notation = String.valueOf((char)letter+row)+Integer.toString(size-col);
+        return notation;
     }
 
     public boolean isSamePosition(Position pos1, Position pos2){
