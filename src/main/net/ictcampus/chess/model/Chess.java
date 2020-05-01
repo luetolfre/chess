@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class Chess {
     private Board board;
-    private List<Player> players;
+    private final List<Player> players;
     private Player currPlayer;
     private GameStatus status;
     private List<Move> history;
@@ -75,7 +75,7 @@ public class Chess {
 
 
     /**
-     * Tries to make a move. Moves Piece, kills Piece, adds Piece to history, changes Gamestatus and changes currentPlayer.
+     * Tries to make a move. Moves Piece, kills Piece, adds Piece to history, changes GameStatus and changes currentPlayer.
      * @param move Move that will be tried.
      * @param player Player that tries that move.
      * @return false if it is not a valid move. true if move was successful

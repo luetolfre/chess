@@ -2,10 +2,8 @@ package net.ictcampus.chess.gui;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import net.ictcampus.chess.Controller;
 import net.ictcampus.chess.model.Chess;
 
 public class EndPane extends BorderPane {

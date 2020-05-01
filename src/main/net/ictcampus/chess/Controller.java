@@ -27,10 +27,6 @@ import java.util.List;
 public class Controller {
 
 
-    public static void play(){
-
-    }
-
     /**
      * Creates an instance of the Chess Game, that will be accessible from
      * front end.
@@ -93,18 +89,7 @@ public class Controller {
         stage.show();
     }
 
-
-
-    public static Node getNode(GridPane grid, int row, int col){
-        for (Node node:grid.getChildren()) {
-            if (grid.getRowIndex(node)== row && grid.getColumnIndex(node)== col){
-                return node;
-            }
-        }
-        return null;
-    }
-
-    public static boolean doMove(Chess game, Position start, Position end) throws Exception {
+    public static boolean doMove(Chess game, Position start, Position end) {
         return game.move(game.getCurrPlayer(), start, end);
 
     }

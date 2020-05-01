@@ -30,10 +30,8 @@ public class ChessPane extends BorderPane {
     }
 
     private void setup() {
-        this.BUTTON.setOnAction(event -> {Controller.showEndPane(this.GAME, STAGE);});
+        this.BUTTON.setOnAction(event -> Controller.showEndPane(this.GAME, STAGE));
         this.setCenter(this.BOARD);
-        //this.setLeft(createVBoxText("player1"));
-        //this.setRight(createVBoxText("player2"));
         this.setBottom(this.BUTTON);
     }
 
@@ -44,12 +42,4 @@ public class ChessPane extends BorderPane {
         Style.addStyleClass(this.BOARD, "board");
         Style.addStyleClass(this.BUTTON, "play-button");
     }
-    private VBox createVBoxText(String string){
-        Text text = new Text(string);
-        Style.addStyleClass(text, "player-name");
-        VBox vBox = Style.addToVBox(text);
-        Style.addStyleClass(vBox, "player-v-box");
-        return vBox;
-    }
-
 }

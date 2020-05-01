@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class Board {
     private static final int SIZE = 8;
-    private Position[][] tiles;
+    private final Position[][] tiles;
 
 
     /**
@@ -143,18 +143,6 @@ public class Board {
             }
         }
         position.getPiece().setPossibleMoves(possibleMoves);
-    }
-
-    // TODO: REMOVE DEBUG METHOD
-    public void printBoard() {
-        for (Position[] row : tiles) {
-            for (Position p : row) {
-                if (p.getPiece() != null) System.out.print(p.getPiece().getImagePath()+ ", ");
-                else System.out.print(p.getPiece() + ", ");
-
-            }
-            System.out.println();
-        }
     }
 
     public Position[][] getTiles() {

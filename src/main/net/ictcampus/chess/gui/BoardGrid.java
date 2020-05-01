@@ -2,11 +2,7 @@ package net.ictcampus.chess.gui;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
-import javafx.geometry.HPos;
-import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Node;
-import javafx.scene.control.Control;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -19,7 +15,6 @@ import net.ictcampus.chess.model.Position;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,15 +22,13 @@ public class BoardGrid extends GridPane {
 
     private final Chess GAME;
     private final static int SIZE = 8;
-    private List<Rectangle> tiles;
-    private List<Position> pieces;
+    private final List<Position> pieces;
     private Position currPosition;
 
 
     public BoardGrid(Chess game) throws FileNotFoundException {
         this.GAME = game;
         this.pieces = Controller.createObservablePieces(game.getBoard().getTiles());
-        this.tiles = new ArrayList<>();
         this.createBoard();
         this.updatePieces();
         this.style();
@@ -64,7 +57,6 @@ public class BoardGrid extends GridPane {
                     }
                 });
                 bindSize(tile, this, col, row);
-                tiles.add(tile);
                 this.add(tile, col, row);
             }
         }
@@ -104,12 +96,6 @@ public class BoardGrid extends GridPane {
         tile.heightProperty().bind(rectsAreaSize.divide(SIZE));
     }
 
-    private void setConstraints(GridPane board){
-        for (int i = 0; i < 8; i++) {
-            board.getColumnConstraints().add(new ColumnConstraints(5, Control.USE_COMPUTED_SIZE, Double.POSITIVE_INFINITY, Priority.ALWAYS, HPos.CENTER, true));
-            board.getRowConstraints().add(new RowConstraints(5, Control.USE_COMPUTED_SIZE, Double.POSITIVE_INFINITY, Priority.ALWAYS, VPos.CENTER, true));
-        }
-    }
 
     private void style(){
         Style.setStyleSheet(this, "/css/chess.css");
@@ -126,49 +112,37 @@ public class BoardGrid extends GridPane {
             System.out.println("-----");
             setCurrPosition(positionPiece);
             for (Position possiblePosition : possibilities) {
-                Node node = Controller.getNode(this, possiblePosition.getRow(), possiblePosition.getCol());
+                Node node = getNode( possiblePosition.getRow(), possiblePosition.getCol());
                 assert node != null;
                 Style.addStyleClass(node, "highlight");
-                node.setOnMouseClicked(e -> movable(img, possiblePosition, positionPiece));
-                    // TODO reset mouseclickevent after this.
-                    // TODO set Mouseclickevent outside of function
-
+                node.setOnMouseClicked(e -> movable(img, possiblePosition));
                 System.out.println(possiblePosition.getRow() + " " + possiblePosition.getCol());
             }
         }
     }
 
-    private void movable(ImageView img, Position possiblePosition, Position position){
+    private void movable(ImageView img, Position possiblePosition){
         try {
             if(Controller.doMove(GAME, currPosition, possiblePosition)){
-                //GAME.getBoard().printBoard();
                 this.getChildren().remove(getImage(possiblePosition.getRow(), possiblePosition.getCol()));
                 this.getChildren().remove(img);
 
                 this.add(img, possiblePosition.getCol(), possiblePosition.getRow());
-                /*
-                img.setOnMouseClicked(event -> {
-                    try {
-                        checkPiece(img, position);
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
-                    }
-                });*/
                 for (Node n : this.getChildren()) {
                     Style.delStyleClass(n, "highlight");
                 }
-            };
+            }
             setMouseClickListener();
         } catch (Exception exception) {
             exception.printStackTrace();
         }
     }
 
-    private void checkTile(int row, int col) throws Exception {
+    private void checkTile(int row, int col) {
         Board board = this.GAME.getBoard();
         Color color =this.GAME.getCurrPlayer().getColor();
         if(board.isPiece(row,col) && board.getPiece(row,col).getColor()==color){
-            ImageView img = getImage(row, col); //getImage(board.getPiece(row, col).getImagePath());
+            ImageView img = getImage(row, col);
             checkPiece(img, this.GAME.getBoard().getTile(row,col));
         }
     }
