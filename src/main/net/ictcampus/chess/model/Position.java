@@ -30,16 +30,6 @@ public class Position {
         this.notation = notate(row, col);
     }
 
-    /** Notates the Position on the Board
-     * @param row which it is in the 2D Board Array
-     * @param col which it is in the 2D Board Array
-     * @return the correct Notation of the Board
-     */
-    public String notate(int row, int col){
-        char letter = 'A';
-        int size = 8;
-        return (char) (letter + row) +Integer.toString(size-col);
-    }
 
     /**
      * Checks if there is a Piece in this Position
@@ -87,6 +77,17 @@ public class Position {
             return this.isSameColor(position.getPiece().getColor());
         }
         return false;
+    }
+
+    /** Notates the Position on the Board
+     * @param row which it is in the 2D Board Array
+     * @param col which it is in the 2D Board Array
+     * @return the correct Notation of the Board
+     */
+    private String notate(int row, int col){
+        char letter = 'A';
+        int size = 8;
+        return (char) (letter + row) +Integer.toString(size-col);
     }
 
     public int getRow() {

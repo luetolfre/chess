@@ -39,27 +39,6 @@ public class Chess {
 
 
     /**
-     * Adds player to the list of players in the game
-     * @param player1 name of player 1
-     * @param player2 name of player 2
-     * @return list of players
-     */
-    private List<Player> createPlayerList(String player1, String player2) {
-        List<Player> players = new ArrayList<>();
-        players.add(new Player(player1, Color.WHITE));
-        players.add(new Player(player2, Color.BLACK));
-        return players;
-    }
-
-    /**
-     * Checks if a Chess Game is already over.
-     * @return true if it is over, false if it is still running
-     */
-    public boolean isOver(){
-        return this.status != GameStatus.RUNNING;
-    }
-
-    /**
      * Creates a Move from a Player of the start Position to the end Position
      * @param player Player who tries to move
      * @param start initial Position of Piece
@@ -114,6 +93,27 @@ public class Chess {
         board.update();
 
         return true;
+    }
+
+    /**
+     * Adds player to the list of players in the game
+     * @param player1 name of player 1
+     * @param player2 name of player 2
+     * @return list of players
+     */
+    private List<Player> createPlayerList(String player1, String player2) {
+        List<Player> players = new ArrayList<>();
+        players.add(new Player(player1, Color.WHITE));
+        players.add(new Player(player2, Color.BLACK));
+        return players;
+    }
+
+    /**
+     * Checks if a Chess Game is already over.
+     * @return true if it is over, false if it is still running
+     */
+    private boolean isOver(){
+        return this.status != GameStatus.RUNNING;
     }
 
     /**

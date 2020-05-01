@@ -15,9 +15,9 @@ import java.util.List;
  * @since 2020-05-01
  */
 public class Board {
+
     private static final int SIZE = 8;
     private final Position[][] tiles;
-
 
     /**
      * Initializes a new Board Object
@@ -26,41 +26,6 @@ public class Board {
         this.tiles = initBoard();
     }
 
-    /**
-     * Creates the Board with the Positions and the Pieces on them .
-     * @return 2D List of Positions on Board
-     */
-    public Position[][] initBoard(){
-        Position[][] tiles = new Position[SIZE][SIZE];
-        for (int i = 0; i<SIZE; i++){
-            tiles[1][i]= new Position(1,i,new Pawn( Color.BLACK));
-            tiles[6][i]= new Position(6,i,new Pawn( Color.WHITE));
-        }
-        tiles[7][0] = new Position(7,0, new Rook(Color.WHITE));
-        tiles[7][1] = new Position(7,1, new Knight(Color.WHITE));
-        tiles[7][2] = new Position(7,2, new Bishop(Color.WHITE));
-        tiles[7][3] = new Position(7,3, new Queen(Color.WHITE));
-        tiles[7][4] = new Position(7,4, new King(Color.WHITE));
-        tiles[7][5] = new Position(7,5, new Bishop(Color.WHITE));
-        tiles[7][6] = new Position(7,6, new Knight(Color.WHITE));
-        tiles[7][7] = new Position(7,7, new Rook(Color.WHITE));
-
-        tiles[0][0] = new Position(0,0, new Rook(Color.BLACK));
-        tiles[0][1] = new Position(0,1, new Knight(Color.BLACK));
-        tiles[0][2] = new Position(0,2, new Bishop(Color.BLACK));
-        tiles[0][3] = new Position(0,3, new Queen(Color.BLACK));
-        tiles[0][4] = new Position(0,4, new King(Color.BLACK));
-        tiles[0][5] = new Position(0,5, new Bishop(Color.BLACK));
-        tiles[0][6] = new Position(0,6, new Knight(Color.BLACK));
-        tiles[0][7] = new Position(0,7, new Rook(Color.BLACK));
-
-        for (int row = 2; row < 6; row++) {
-            for (int col = 0; col < 8; col++) {
-                tiles[row][col] = new Position(row, col, null);
-            }
-        }
-        return tiles;
-    }
 
     /**
      * updates the board, kills Pieces and updates possible Moves for them.
@@ -84,16 +49,6 @@ public class Board {
             return null;
         }
         return tiles[row][col];
-    }
-
-    /**
-     * Checks if the coordinates is even on the Board.
-     * @param row of the Board
-     * @param col of the Board
-     * @return true if it is on the Board, false if it is not
-     */
-    private boolean isOnBoard(int row, int col){
-        return row >= 0 && row < SIZE && col >= 0 && col < SIZE;
     }
 
     /**
@@ -126,6 +81,52 @@ public class Board {
     public boolean isColoredPiece(int row, int col, Color color){
         if(isPiece(row, col)) return getPiece(row, col).getColor() == color;
         else return false;
+    }
+
+    /**
+     * Creates the Board with the Positions and the Pieces on them .
+     * @return 2D List of Positions on Board
+     */
+    private Position[][] initBoard(){
+        Position[][] tiles = new Position[SIZE][SIZE];
+        for (int i = 0; i<SIZE; i++){
+            tiles[1][i]= new Position(1,i,new Pawn( Color.BLACK));
+            tiles[6][i]= new Position(6,i,new Pawn( Color.WHITE));
+        }
+        tiles[7][0] = new Position(7,0, new Rook(Color.WHITE));
+        tiles[7][1] = new Position(7,1, new Knight(Color.WHITE));
+        tiles[7][2] = new Position(7,2, new Bishop(Color.WHITE));
+        tiles[7][3] = new Position(7,3, new Queen(Color.WHITE));
+        tiles[7][4] = new Position(7,4, new King(Color.WHITE));
+        tiles[7][5] = new Position(7,5, new Bishop(Color.WHITE));
+        tiles[7][6] = new Position(7,6, new Knight(Color.WHITE));
+        tiles[7][7] = new Position(7,7, new Rook(Color.WHITE));
+
+        tiles[0][0] = new Position(0,0, new Rook(Color.BLACK));
+        tiles[0][1] = new Position(0,1, new Knight(Color.BLACK));
+        tiles[0][2] = new Position(0,2, new Bishop(Color.BLACK));
+        tiles[0][3] = new Position(0,3, new Queen(Color.BLACK));
+        tiles[0][4] = new Position(0,4, new King(Color.BLACK));
+        tiles[0][5] = new Position(0,5, new Bishop(Color.BLACK));
+        tiles[0][6] = new Position(0,6, new Knight(Color.BLACK));
+        tiles[0][7] = new Position(0,7, new Rook(Color.BLACK));
+
+        for (int row = 2; row < 6; row++) {
+            for (int col = 0; col < 8; col++) {
+                tiles[row][col] = new Position(row, col, null);
+            }
+        }
+        return tiles;
+    }
+
+    /**
+     * Checks if the coordinates is even on the Board.
+     * @param row of the Board
+     * @param col of the Board
+     * @return true if it is on the Board, false if it is not
+     */
+    private boolean isOnBoard(int row, int col){
+        return row >= 0 && row < SIZE && col >= 0 && col < SIZE;
     }
 
     /**
