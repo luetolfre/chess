@@ -99,7 +99,7 @@ public class Chess {
             move.setCastling(true);
         }
         history.add(move);
-
+        movingPiece.setMoved(true);
         end.setPiece(movingPiece);
         start.setPiece(null);
 

@@ -33,7 +33,6 @@ public class Pawn extends Piece {
         if(!hasMoved()){
             if(     start.getCol()==end.getCol() &&
                     start.getRow()+2*this.getColor().getDir()==end.getRow()){
-                this.setMoved(true);
                 return true;
             }
         }
