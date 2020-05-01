@@ -1,6 +1,5 @@
 package net.ictcampus.chess.model;
 
-import javafx.geometry.Pos;
 import net.ictcampus.chess.constant.Color;
 import net.ictcampus.chess.model.piece.*;
 
@@ -13,7 +12,7 @@ import java.util.List;
  *
  * @author luetolfre
  * @version 1.0
- * @since 2020-04-30
+ * @since 2020-05-01
  */
 public class Board {
     private static final int SIZE = 8;

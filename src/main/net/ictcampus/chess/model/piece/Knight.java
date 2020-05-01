@@ -5,29 +5,31 @@ import net.ictcampus.chess.model.Board;
 import net.ictcampus.chess.model.Position;
 
 /**
- * <h3> Bishop Class </h3>
- * represents a Bishop Piece in a chess game
+ * <h3> Knight Class </h3>
+ * represents a knight piece
  *
  * @author luetolfre
  * @version 1.0
- * @since 2020-04-24
+ * @since 2020-05-01
  */
-public class Bishop extends Piece {
+public class Knight extends Piece {
 
-    private static final String IMG = "bishop.png";
+    private static final String IMG = "knight.png";
 
     /**
-     * Initializes a new Bishop object.
+     * Initializes a new Knight object
      * @param color BLACK or WHITE
      */
-    public Bishop(Color color) {
-        super( color);
+    public Knight(Color color) {
+        super(color);
         setImagePath((color == Color.BLACK) ? "res/img/b/"+IMG : "res/img/w/" + IMG);
     }
 
     @Override
     public boolean isMovable(Board board, Position start, Position end) {
         if(start.isOwnColor(end)) return false;
-        return this.bishopMovement(board, start, end);
+        int col = Math.abs(start.getCol() - end.getCol());
+        int row = Math.abs(start.getRow() - end.getRow());
+        return row*col == 2;
     }
 }

@@ -7,19 +7,33 @@ import net.ictcampus.chess.model.Position;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <h3> Piece Class - Abstract </h3>
+ * represents a chess piece
+ *
+ * @author luetolfre
+ * @version 1.0
+ * @since 2020-05-01
+ */
 public abstract class Piece {
-    private Color color;
+    private final Color color;
     private String imagePath;
     private List<Position> possibleMoves;
+    private boolean moved;
     private boolean alive;
 
+    /**
+     * Super Constructor for initializing a specific Piece
+     * @param color BLACK OR WHITE
+     */
     public Piece(Color color) {
         this.color = color;
         this.possibleMoves = new ArrayList<>();
+        this.moved = false;
     }
 
     /**
-     * Checks if this Piece is movable.
+     * Abstract Method for checking if this Piece is movable depending on what kind it is.
      * @param board the board the piece tries to move on
      * @param start the current position of the piece
      * @param end the position it wants to move to
@@ -27,31 +41,13 @@ public abstract class Piece {
      */
     public abstract boolean isMovable(Board board, Position start, Position end);
 
-
-    public Color getColor() {
-        return color;
-    }
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setAlive(boolean alive) {
-        this.alive = alive;
-    }
-
-    public void setPossibleMoves(List<Position> possibleMoves) {
-        this.possibleMoves = possibleMoves;
-    }
-
-    public List<Position> getPossibleMoves() {
-        return possibleMoves;
-    }
-
-    public boolean isAlive() {
-        return alive;
-    }
-
+    /**
+     * Checks if it is a correct ROOK Movement on the board
+     * @param board which it is tried on
+     * @param start Position of the Piece
+     * @param end Position of the Piece
+     * @return bool
+     */
     public boolean rookMovement(Board board, Position start, Position end){
         if(start.getCol()==end.getCol()){
             int maxRow = Math.max(start.getRow(), end.getRow());
@@ -72,6 +68,13 @@ public abstract class Piece {
         }
     }
 
+    /**
+     * Checks if it is a correct BISHOP Movement on the board
+     * @param board which it is tried on
+     * @param start Position of the Piece
+     * @param end Position of the Piece
+     * @return bool
+     */
     public boolean bishopMovement(Board board, Position start, Position end){
         if(!(Math.abs(start.getRow()-end.getRow())==Math.abs(start.getCol()-end.getCol()))) return false;
 
@@ -101,9 +104,52 @@ public abstract class Piece {
         return true;
     }
 
+    /**
+     * Checks if it is a correct QUEEN Movement on the board
+     * @param board which it is tried on
+     * @param start Position of the Piece
+     * @param end Position of the Piece
+     * @return bool
+     */
     public boolean queenMovement(Board board, Position start, Position end){
         return rookMovement(board, start, end) || bishopMovement(board, start, end);
     }
 
 
+
+    public Color getColor() {
+        return this.color;
+    }
+
+    public String getImagePath() {
+        return this.imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
+
+    public List<Position> getPossibleMoves() {
+        return this.possibleMoves;
+    }
+
+    public void setPossibleMoves(List<Position> possibleMoves) {
+        this.possibleMoves = possibleMoves;
+    }
+
+    public boolean isAlive() {
+        return this.alive;
+    }
+
+    public boolean hasMoved() {
+        return this.moved;
+    }
+
+    public void setMoved(boolean moved) {
+        this.moved = moved;
+    }
 }

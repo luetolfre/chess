@@ -2,6 +2,14 @@ package net.ictcampus.chess.model;
 
 import net.ictcampus.chess.model.piece.Piece;
 
+/**
+ * <h3> Move Class </h3>
+ * represents a chess Move
+ *
+ * @author luetolfre
+ * @version 1.0
+ * @since 2020-05-01
+ */
 public class Move {
 
     private Player player;
@@ -11,6 +19,12 @@ public class Move {
     private Piece killedPiece;
     private boolean castling = false;
 
+    /**
+     * Initializes a new Move object
+     * @param player that makes the move
+     * @param start Position of the Piece
+     * @param end Position of the Movement
+     */
     public Move(Player player, Position start, Position end) {
         this.player = player;
         this.start = start;
@@ -18,31 +32,28 @@ public class Move {
         this.movingPiece = start.getPiece();
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
     public Position getStart() {
-        return start;
+        return this.start;
     }
 
     public Position getEnd() {
-        return end;
+        return this.end;
     }
 
     public Piece getMovingPiece() {
-        return movingPiece;
+        return this.movingPiece;
     }
 
     public Piece getKilledPiece() {
-        return killedPiece;
+        return this.killedPiece;
     }
+
     public void setKilledPiece(Piece killedPiece) {
         this.killedPiece = killedPiece;
     }
 
     public boolean isCastling() {
-        return castling;
+        return this.castling;
     }
 
     public void setCastling(boolean castling) {

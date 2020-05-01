@@ -4,28 +4,31 @@ import net.ictcampus.chess.constant.Color;
 import net.ictcampus.chess.model.Board;
 import net.ictcampus.chess.model.Position;
 
-import java.util.List;
-
+/**
+ * <h3> Queen Class </h3>
+ * represents a queen piece
+ *
+ * @author luetolfre
+ * @version 1.0
+ * @since 2020-05-01
+ */
 public class Queen extends Piece {
 
     private static final String IMG = "queen.png";
-    private String imagePath;
-    private List<Position> possibleMoves;
 
+    /**
+     * Initializes a new Queen object
+     * @param color BLACK or WHITE
+     */
     public Queen(Color color) {
         super(color);
-        this.imagePath = (color == Color.BLACK) ? "res/img/b/"+IMG : "res/img/w/" + IMG;
-
+        setImagePath((color == Color.BLACK) ? "res/img/b/"+IMG : "res/img/w/" + IMG);
     }
 
     @Override
     public boolean isMovable(Board board, Position start, Position end) {
-        if (end.isSameColor(this.getColor())) return false;
+        if (start.isOwnColor(end)) return false;
         return queenMovement(board, start, end);
     }
 
-    @Override
-    public String getImagePath() {
-        return imagePath;
-    }
 }

@@ -1,6 +1,5 @@
 package net.ictcampus.chess.model;
 
-import javafx.geometry.Pos;
 import net.ictcampus.chess.constant.Color;
 import net.ictcampus.chess.constant.GameStatus;
 import net.ictcampus.chess.model.piece.King;
@@ -15,7 +14,7 @@ import java.util.List;
  *
  * @author luetolfre
  * @version 1.0
- * @since 2020-04-24
+ * @since 2020-05-01
  */
 public class Chess {
     private Board board;
@@ -66,9 +65,8 @@ public class Chess {
      * @param start initial Position of Piece
      * @param end Position where Piece should move to.
      * @return true if the move is a possible Move
-     * @throws Exception if start or end is Out Of Range of the Board
      */
-    public boolean move(Player player, Position start, Position end) throws Exception {
+    public boolean move(Player player, Position start, Position end) {
         Position startTile = this.board.getTile(start.getRow(), start.getCol());
         Position endTile = this.board.getTile(end.getRow(), end.getCol());
         Move move = new Move(player, startTile, endTile);
@@ -82,7 +80,7 @@ public class Chess {
      * @param player Player that tries that move.
      * @return false if it is not a valid move. true if move was successful
      */
-    private boolean tryMove(Move move, Player player)  {
+    private boolean tryMove(Move move, Player player) {
         Position start = move.getStart();
         Position end = move.getEnd();
         Piece movingPiece = move.getMovingPiece();
