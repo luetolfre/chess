@@ -1,17 +1,19 @@
 .chess-pane{
     -fx-alignment: center;
-    -fx-hgap: 1;
-    -fx-vgap: 1;
+    -fx-max-width: 50px;
+    -fx-max-height: 50px;
+
 }
 .board{
-    -fx-max-width: 750px;
-    -fx-max-height: 750px;
+    -fx-max-width: 500px;
+    -fx-max-height: 500px;
 }
 
 .tile{
 }
 .highlight{
     -fx-stroke: indianred;
+    -fx-stroke-width: 5px;
 }
 
 .piece{
